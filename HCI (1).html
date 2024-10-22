@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCI Calculator</title>
+</head>
+<body>
+    <h1>HCI Calculator</h1>
+    <form id="hciForm">
+        <label for="cpa">Cumulative GPA (CPA):</label>
+        <input type="number" id="cpa" step="0.01" required><br><br>
+
+        <label for="height">Height (m):</label>
+        <input type="number" id="height" step="0.01" required><br><br>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" step="0.01" required><br><br>
+
+        <button type="button" onclick="calculateHCI()">Calculate HCI</button>
+    </form>
+
+    <h2>HCI Result: <span id="result"></span></h2>
+
+    <script>
+        function calculateHCI() {
+            var CPA = parseFloat(document.getElementById('cpa').value);
+            var H = parseFloat(document.getElementById('height').value);
+            var W = parseFloat(document.getElementById('weight').value);
+
+            var deltaW = Math.abs(W - (H - 1) * 90 - 3);
+
+            var HCI = (CPA / 3.2) * 0.7 + (H / 1.7) * 0.2 + ((H - 1) * 90 + 3 - 5 * deltaW) / ((H - 1) * 90 + 3) * 0.1;
+
+            document.getElementById('result').textContent = HCI.toFixed(2);
+        }
+    </script>
+</body>
+</html>
